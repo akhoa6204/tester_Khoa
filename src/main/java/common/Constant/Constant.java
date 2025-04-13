@@ -8,5 +8,4 @@ public class Constant {
     public static final String USERNAME = "asddd@gmail.com";
     public static final String PASSWORD = "123456789";
     public static final String NEW_PASSWORD = "Akhoa@6204";
-
 }

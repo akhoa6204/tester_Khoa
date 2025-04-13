@@ -98,8 +98,11 @@ public class MyTicketPage extends GeneralPage{
         btnCancel.click();
         Alert alert = Constant.WEBDRIVER.switchTo().alert();
         alert.accept();
-
-        return checkRow(idTicket);
+        boolean result = checkRow(idTicket);
+        if (!result){
+            tableData.remove(idTicket);
+        }
+        return result;
 
     }
 }
