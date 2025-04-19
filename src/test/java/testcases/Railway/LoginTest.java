@@ -72,11 +72,6 @@ public class LoginTest {
         System.out.println("TC02 - User can't login with blank \"Username\" textbox.");
         HomePage homePage = new HomePage();
         homePage.open();
-        try {
-            homePage.clickLogout();
-        } catch (Exception e) {
-            // do nothing
-        }
 
         LoginPage loginPage = homePage.gotoLoginPage();
 
@@ -91,11 +86,6 @@ public class LoginTest {
         System.out.println("TC03 - User cannot log into Railway with invalid password");
         HomePage homePage = new HomePage();
         homePage.open();
-        try {
-            homePage.clickLogout();
-        } catch (Exception e) {
-            // do nothing
-        }
         LoginPage loginPage = homePage.gotoLoginPage();
 
         loginPage.login("khoa@gmail.com", "asasasdasd");
@@ -109,11 +99,6 @@ public class LoginTest {
         System.out.println("TC04 - Login page displays when un-logged User clicks on \"Book ticket\" tab.");
         HomePage homePage = new HomePage();
         homePage.open();
-        try {
-            homePage.clickLogout();
-        } catch (Exception e) {
-            // do nothing
-        }
         homePage.clickBookTicket();
 
         String actualMsg = Constant.WEBDRIVER.getCurrentUrl();
@@ -126,11 +111,6 @@ public class LoginTest {
         System.out.println("TC05 - System shows message when user enters wrong password several times.");
         HomePage homePage = new HomePage();
         homePage.open();
-        try {
-            homePage.clickLogout();
-        } catch (Exception e) {
-            // do nothing
-        }
         LoginPage loginPage = homePage.gotoLoginPage();
 
         for(int i = 0; i < 3; i++){
@@ -175,11 +155,6 @@ public class LoginTest {
 
         HomePage homePage = new HomePage();
         homePage.open();
-        try{
-            homePage.clickLogout();
-        }catch (Exception e){
-            // do nothing
-        }
         Random rand = new Random();
         int randomNumber = 10000 + rand.nextInt(90000);
         String email = "akhoa" + randomNumber + "@gmail.com";
