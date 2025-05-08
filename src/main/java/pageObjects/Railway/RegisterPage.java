@@ -1,5 +1,6 @@
 package pageObjects.Railway;
 
+import common.Common.WebUi;
 import common.Constant.Constant;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -17,32 +18,32 @@ public class RegisterPage extends GeneralPage{
     private final By lblErrorMessageForPid = By.xpath("//label[@for=\"pid\" and @class=\"validation-error\"]");
 
     public WebElement getTxtEmail() {
-        return waitForElementVisible(_txtEmail, 10);
+        return WebUi.waitForElementVisible(_txtEmail, 10);
     }
 
     public WebElement getTxtPassword() {
-        return waitForElementVisible(_txtPassword, 10);
+        return WebUi.waitForElementVisible(_txtPassword, 10);
     }
 
     public WebElement getTxtConfirmedPassword() {
-        return waitForElementVisible(_txtConfirmedPassword, 10);
+        return WebUi.waitForElementVisible(_txtConfirmedPassword, 10);
     }
 
     public WebElement getTxtPassport() {
-        return waitForElementVisible(_txtPassport, 10);
+        return WebUi.waitForElementVisible(_txtPassport, 10);
     }
 
     public WebElement getBtnRegister() {
-        return waitForElementVisible(btnRegister, 10);
+        return WebUi.waitForElementVisible(btnRegister, 10);
     }
 
     public WebElement getLblWelcomeMessage(){
-        return waitForElementVisible(lblWelcomeMessage, 10);
+        return WebUi.waitForElementVisible(lblWelcomeMessage, 10);
     }
     public WebElement getLblErrorMessageForPassword(){
-        return waitForElementVisible(lblErrorMessageForPassword, 10);
+        return WebUi.waitForElementVisible(lblErrorMessageForPassword, 10);
     }public WebElement getLblErrorMessageForPid(){
-        return waitForElementVisible(lblErrorMessageForPid, 10);
+        return WebUi.waitForElementVisible(lblErrorMessageForPid, 10);
     }
     //Methods
     public String getErrorMessageForPassword(){
