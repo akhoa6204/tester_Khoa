@@ -1,8 +1,11 @@
 package dataObjects;
 
+import java.util.Date;
+
 public class Ticket {
     String id, date, depart, arrive, type, amount;
-    public Ticket(String depart, String arrive, String type, String amount){
+    public Ticket(String date, String depart, String arrive, String type, String amount){
+        this.date=date;
         this.depart =depart;
         this.arrive=arrive;
         this.type=type;

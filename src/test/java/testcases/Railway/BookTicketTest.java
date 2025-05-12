@@ -13,6 +13,9 @@ import pageObjects.Railway.BookTicketPage;
 import pageObjects.Railway.HomePage;
 import pageObjects.Railway.LoginPage;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class BookTicketTest {
     @BeforeTest
     public void beforeMethod(){
@@ -37,7 +40,12 @@ public class BookTicketTest {
         loginPage.login(user);
 
         BookTicketPage bookTicketPage = loginPage.gotoBookTicketPage();
-        Ticket actualTicket = new Ticket("Đà Nẵng", "Nha Trang", "Hard seat", "1");
+
+        LocalDate date = LocalDate.now().plusDays(5);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+        String formattedDate = date.format(formatter);
+
+        Ticket actualTicket = new Ticket(formattedDate, "Sài Gòn", "Nha Trang", "Hard seat", "1");
         String idTicket = bookTicketPage.bookTicket(actualTicket);
         actualTicket.setId(idTicket);
 
@@ -47,6 +55,7 @@ public class BookTicketTest {
         String expectedMessageMsg = "Ticket booked successfully!";
 
         Assert.assertEquals(actualMessageMsg, expectedMessageMsg, "Success message is not displayed as expected.");
+        Assert.assertEquals(actualTicket.getDate(), expectedTicket.getDate(), "Depart date mismatch");
         Assert.assertEquals(actualTicket.getDepart(), expectedTicket.getDepart(), "Depart station mismatch");
         Assert.assertEquals(actualTicket.getArrive(), expectedTicket.getArrive(), "Arrive station mismatch");
         Assert.assertEquals(actualTicket.getType(), expectedTicket.getType(), "Seat type mismatch");

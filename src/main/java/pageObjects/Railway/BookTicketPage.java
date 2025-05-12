@@ -72,13 +72,17 @@ public class BookTicketPage extends GeneralPage{
     public void selectFromDropdown(WebElement dropdown, String optionText) {
         WebUi.scrollIntoView(dropdown);
         dropdown.click();
+
         String option = ".//option[text()='%s']";
         WebElement optionElement = dropdown.findElement(By.xpath(String.format(option, optionText)));
         WebUi.scrollIntoView(optionElement);
         optionElement.click();
+
     }
 
     public String bookTicket(Ticket ticket){
+        selectFromDropdown(this.getTxtDate(), ticket.getDate());
+        selectFromDropdown(this.getTxtDepartStation(), ticket.getDepart());
         selectFromDropdown(this.getTxtDepartStation(), ticket.getDepart());
         selectFromDropdown(this.getTxtArriveStation(), ticket.getArrive());
         selectFromDropdown(this.getTxtSeatType(), ticket.getType());
@@ -91,6 +95,7 @@ public class BookTicketPage extends GeneralPage{
 
     public Ticket getDataTicket(){
         Ticket ticket = new Ticket();
+        ticket.setDate(WebUi.waitForElementVisible(this.getDynamicColumn("Depart Date"), 10).getText());
         ticket.setDepart(WebUi.waitForElementVisible(this.getDynamicColumn("Depart Station"), 10).getText());
         ticket.setArrive(WebUi.waitForElementVisible(this.getDynamicColumn("Arrive Station"), 10).getText());
         ticket.setType(WebUi.waitForElementVisible(this.getDynamicColumn("Seat Type"), 10).getText());

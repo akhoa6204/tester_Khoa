@@ -14,6 +14,9 @@ import pageObjects.Railway.HomePage;
 import pageObjects.Railway.LoginPage;
 import pageObjects.Railway.MyTicketPage;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class MyTicketTest {
     @BeforeTest
     public void beforeMethod(){
@@ -28,7 +31,7 @@ public class MyTicketTest {
         Constant.WEBDRIVER.quit();
     }
     @Test
-    public void TC16() throws InterruptedException{
+    public void TC16(){
         System.out.println("TC16 - User can cancel a ticket");
         HomePage homePage = new HomePage();
         homePage.open();
@@ -38,8 +41,12 @@ public class MyTicketTest {
         loginPage.login(user);
 
         BookTicketPage bookTicketPage = loginPage.gotoBookTicketPage();
-        Thread.sleep(5000);
-        Ticket actualTicket = new Ticket("Đà Nẵng", "Nha Trang", "Hard seat", "1");
+
+        LocalDate date = LocalDate.now().plusDays(5);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+        String formattedDate = date.format(formatter);
+
+        Ticket actualTicket = new Ticket(formattedDate, "Đà Nẵng", "Nha Trang", "Hard seat", "1");
 
         actualTicket.setId(bookTicketPage.bookTicket(actualTicket));
         MyTicketPage myTicketPage = bookTicketPage.gotoMyTicketPage();
