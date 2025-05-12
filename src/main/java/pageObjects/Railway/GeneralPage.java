@@ -19,7 +19,7 @@ public class GeneralPage {
     private final String dynamicMenuItem = "//div[@id='menu']//span[contains(text(), '%s')]";
 
     protected WebElement getLblWelcomeMessage(){
-        return WebUi.waitForElementVisible(lblWelcomeMessage, 10);
+        return WebUi.waitForElementVisible(lblWelcomeMessage, 3);
     }
 
     protected WebElement getLblMessageError() {
@@ -28,7 +28,7 @@ public class GeneralPage {
 
 
     public WebElement getDynamicMenuItem(String enumData){
-        return WebUi.waitForElementVisible(By.xpath(String.format(dynamicMenuItem, enumData)), 5);
+        return WebUi.waitForElementVisible(By.xpath(String.format(dynamicMenuItem, enumData)), 2);
     }
 
     public String getWelcomeMessage(){
@@ -36,6 +36,7 @@ public class GeneralPage {
     }
 
     public String getMessageError(){
+        WebUi.scrollIntoView(this.getLblMessageError());
         return this.getLblMessageError().getText();
     }
     public TimeTablePage gotoTimeTablePage(){

@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>testStart</artifactId>
+    <artifactId>KTAuto_Sele_Java_Nhom07</artifactId>
     <version>1.0-SNAPSHOT</version>
     <dependencies>
         <dependency>

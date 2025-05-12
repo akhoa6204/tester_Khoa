@@ -5,7 +5,10 @@ import common.Constant.Constant;
 import dataObjects.Ticket;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +19,10 @@ public class BookTicketPage extends GeneralPage{
     private final String dynamicColumn = "//tr[2]/td[position() = count(//th[contains(normalize-space(text()), \"%s\")]/preceding-sibling::th) + 1]";
     private final By btnBookTicket = By.xpath("//input[@value=\"Book ticket\"]");
     private final By lblSuccessMessage = By.xpath("//div[@id='content']/h1");
-
+    private final By table = By.xpath("//table");
+    public WebElement getTable(){
+        return WebUi.waitForElementVisible(table, 10);
+    }
     public By getDynamicSelect(String text) {
         return By.xpath(String.format(dynamicSelect, text));
     }
@@ -46,15 +52,15 @@ public class BookTicketPage extends GeneralPage{
     public String getDepartStation(){
         WebElement select = this.getTxtDepartStation();
         WebUi.scrollIntoView(select);
-        WebElement selectedOption = select.findElement(By.xpath(".//option[1]"));
-        return selectedOption.getText().trim();
+        WebElement option = select.findElement(By.xpath(".//option[@selected]"));
+        return option.getText().trim();
     }
 
     public String getArriverStation(){
         WebElement select = this.getTxtArriveStation();
         WebUi.scrollIntoView(select);
-        WebElement selectedOption = select.findElement(By.xpath(".//option[1]"));
-        return selectedOption.getText().trim();
+        WebElement option = select.findElement(By.xpath(".//option[@selected]"));
+        return option.getText().trim();
     }
 
     public WebElement getLblSuccessMessage() {
@@ -69,18 +75,17 @@ public class BookTicketPage extends GeneralPage{
         return this.getLblSuccessMessage().getText();
     }
     //Methods
-    public void selectFromDropdown(WebElement dropdown, String optionText) {
+    public void selectFromDropdown(WebElement dropdown, String optionText) throws InterruptedException {
         WebUi.scrollIntoView(dropdown);
         dropdown.click();
-
+        Thread.sleep(500);
         String option = ".//option[text()='%s']";
         WebElement optionElement = dropdown.findElement(By.xpath(String.format(option, optionText)));
         WebUi.scrollIntoView(optionElement);
         optionElement.click();
-
     }
 
-    public String bookTicket(Ticket ticket){
+    public String bookTicket(Ticket ticket) throws InterruptedException {
         selectFromDropdown(this.getTxtDate(), ticket.getDate());
         selectFromDropdown(this.getTxtDepartStation(), ticket.getDepart());
         selectFromDropdown(this.getTxtDepartStation(), ticket.getDepart());
@@ -90,10 +95,12 @@ public class BookTicketPage extends GeneralPage{
 
         WebUi.scrollIntoView(this.getBtnBookTicket());
         this.getBtnBookTicket().click();
+
         return Constant.WEBDRIVER.getCurrentUrl().split("\\?id=")[1];
     }
 
     public Ticket getDataTicket(){
+        WebUi.scrollIntoView(this.getTable());
         Ticket ticket = new Ticket();
         ticket.setDate(WebUi.waitForElementVisible(this.getDynamicColumn("Depart Date"), 10).getText());
         ticket.setDepart(WebUi.waitForElementVisible(this.getDynamicColumn("Depart Station"), 10).getText());

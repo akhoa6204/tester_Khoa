@@ -47,11 +47,13 @@ public class RegisterPage extends GeneralPage{
     }
     //Methods
     public String getErrorMessageForPassword(){
-        return getLblErrorMessageForPassword().getText();
+        WebUi.scrollIntoView(this.getLblErrorMessageForPassword());
+        return this.getLblErrorMessageForPassword().getText();
     }
 
     public String getErrorMessageForPid(){
-        return getLblErrorMessageForPid().getText();
+        WebUi.scrollIntoView(this.getLblErrorMessageForPid());
+        return this.getLblErrorMessageForPid().getText();
     }
     public String register(String email, String password, String confirmedPassword, String pid){
         this.getTxtEmail().sendKeys(email);
